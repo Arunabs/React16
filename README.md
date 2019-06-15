@@ -14,5 +14,10 @@ git push -u origin master
 
 # React16
 
-#command to install the React project base
+# command to install the React project base
+
 sudo npm install -g create-react-app
+
+# create the react project
+
+command : create-react-app jsx
