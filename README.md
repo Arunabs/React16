@@ -21,3 +21,7 @@ sudo npm install -g create-react-app
 # create the react project
 
 command : create-react-app jsx
+
+Faker Library:
+
+npm install --save faker
