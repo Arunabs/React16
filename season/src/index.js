@@ -20,7 +20,7 @@ class App extends React.Component {
   }
   /**
    * helper function to avoid the multiple return method inside the
-   * render method
+   * render
    */
   getContent() {
     if (this.state.errMessage && !this.state.lat) {
