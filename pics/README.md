@@ -76,3 +76,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 5. Handling default submit buttom behavior
 6. Solving the context issue
 7. Communicating child to parent
+8. Ref to access the individual element
