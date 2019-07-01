@@ -25,3 +25,9 @@ command : create-react-app jsx
 Faker Library:
 
 npm install --save faker
+
+#to make service call
+axios is third party package. instead of using the fetch and writing lot more code
+better to use the axios which is alredy has the functionality
+
+npm install axios --save-dev
