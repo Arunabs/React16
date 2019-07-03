@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { fetchUser } from "../actions";
 
 class UserHeader extends React.Component {
-  componentDidMount() {
-    this.props.fetchUser(this.props.userId);
-  }
+  //   componentDidMount() {
+  //     this.props.fetchUser(this.props.userId);
+  //   }
   render() {
     /* 
       //same logic can be added in the mapStateToProps
