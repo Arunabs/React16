@@ -7,39 +7,15 @@
       "id": 1
     },
     {
-      "title": "Amma",
-      "description": "God",
-      "userId": "100930198191075587961",
-      "id": 2
-    },
-    {
       "title": "Ramayana-> Ramatest",
       "description": "Rama",
       "id": 3
-    },
-    {
-      "title": "Mahabaratha ",
-      "description": "arjuna",
-      "userId": "100930198191075587961",
-      "id": 4
     },
     {
       "title": "baghavan",
       "description": "krishna",
       "userId": null,
       "id": 5
-    },
-    {
-      "title": "Programatic navigation",
-      "description": "should not see this page after submit",
-      "userId": "100930198191075587961",
-      "id": 6
-    },
-    {
-      "title": "new stream from streamform",
-      "description": "hello new stream",
-      "userId": "100930198191075587961",
-      "id": 7
     }
   ]
 }
