@@ -109,10 +109,30 @@ If you already have Redux Form installed you may also have to delete your node_m
 
 UPDATE: There are many bugs in Redux Form v8.2.0 so for now we would still suggest using the above mentioned version.
 
+### how to run this project
+
+1.To run server
+go to /stream/api in terminal and run below command to up the server
+
+```
+npm start
+```
+
+2. To run client
+   go to stream/client in terminal and run below command to up the client server
+
+   ```
+   npm start
+   ```
+
+```
+
 ### Redux forms
 
 ```
+
 npm install --save redux-form
+
 ```
 
 documentaion > redux-form.com
@@ -136,6 +156,7 @@ Warning: <BrowserRouter> ignores the history prop. To use a custom history, use 
 ex:
 
 ```
+
 <BrowserRouter history={history}>
 ```
 
