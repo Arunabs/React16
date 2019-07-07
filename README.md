@@ -31,3 +31,7 @@ axios is third party package. instead of using the fetch and writing lot more co
 better to use the axios which is alredy has the functionality
 
 npm install axios --save-dev
+
+### JSON server
+
+npm install --save json-server

@@ -71,7 +71,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 command to install the react router
 
+```
 npm install --save react-router-dom
+```
 
 ######To use google JS api inclued below link in your html file.
 Google doesn't provide the npm package for this one.
@@ -80,7 +82,9 @@ Google doesn't provide the npm package for this one.
 
 library can accessed using gapi
 
+```
 npm install --save redux react-redux
+```
 
 ###redux dev tools :
 
@@ -107,8 +111,236 @@ UPDATE: There are many bugs in Redux Form v8.2.0 so for now we would still sugge
 
 ### Redux forms
 
+```
 npm install --save redux-form
+```
 
 documentaion > redux-form.com
 pick the reducer from the redux form and connect it to combineReducers
 import {reducer} from 'redux-form';
+
+History Object Deprecation Warning
+In the next lecture we are going to be creating our history object. As of React Router DOM v4.4.0 you will get a warning in your console:
+
+Warning: Please use `require("history").createBrowserHistory` instead of `require("history/createBrowserHistory")`. Support for the latter will be removed in the next major release.
+
+To fix, our history.js file should instead look like this:
+
+import { createBrowserHistory } from 'history';
+export default createBrowserHistory();
+Thanks to Torleif B. for finding this bug and providing the fix!
+
+Below warning message will be displayed when use pass the our manualy created history object to BrowserRouter as props
+Warning: <BrowserRouter> ignores the history prop. To use a custom history, use `import { Router }` instead of `import { BrowserRouter as Router }`
+
+ex:
+
+```
+<BrowserRouter history={history}>
+```
+
+So in this case we user Router instead of BrowserRouter.
+We are creating manual router to handle programmaticaly so we use Plain Route insted of BrowserRouter
+
+ex:
+
+```
+import {Router} from "react-router-dom";
+
+<Router history={history}>
+```
+
+### Url parameter configuration
+
+Adding at Route level to get the value in the props params
+ex:
+
+```
+<Route path="/streams/edit/:id" component={streamEdit} />
+```
+
+user can configure single value or multiple value in the route.
+
+ex: single value
+
+```
+  <Router history={history}>
+        <Header />
+        <div>
+          <Route path="/" exact component={streamList} />
+          <Route path="/streams/edit/:id" component={streamEdit} />
+          <Route path="/streams/delete" component={streamDelete} />
+          <Route path="/streams/show" component={streamShow} />
+          <Route path="/streams/create" component={streamCreate} />
+        </div>
+</Router>
+```
+
+ex: multiple values
+
+```
+<Router history={history}>
+
+<Header />
+<div>
+<Route path="/" exact component={streamList} />
+<Route path="/streams/edit/:id/:name/:age" component={streamEdit} />
+<Route path="/streams/delete" component={streamDelete} />
+<Route path="/streams/show" component={streamShow} />
+<Route path="/streams/create" component={streamCreate} />
+</div>
+</Router>
+```
+
+### React redux form
+
+```
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+
+class StreamForm extends React.Component {
+  // getInput(fieldProps) {
+  //   return <input {...fieldProps.input} />;
+  // }
+  getRenderError = meta => {
+    if (meta.touched && meta.error) {
+      return <div className="ui error message">{meta.error}</div>;
+    }
+  };
+
+  getInput = ({ input, label, meta }) => {
+    //console.log(meta);
+    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <input {...input} />
+        {this.getRenderError(meta)}
+      </div>
+    );
+  };
+  resetForm = () => {
+    this.props.reset();
+  };
+
+  render() {
+    console.log("test", this.props);
+    return (
+      <form
+        className="ui form error"
+        onSubmit={this.props.handleSubmit(this.formSubmit)}
+      >
+        <Field name="title" component={this.getInput} label="Enter Name" />
+        <Field
+          name="description"
+          component={this.getInput}
+          label="Enter Description"
+        />
+        <button className="ui button primary" onClick={this.resetForm}>
+          Reset
+        </button>
+        <button className="ui button primary">Submit</button>
+      </form>
+    );
+  }
+}
+const validate = formValues => {
+  let error = {};
+  if (!formValues.title) {
+    error.title = "Must enter the title";
+  }
+  if (!formValues.description) {
+    error.description = "Must enter the description";
+  }
+  return error;
+};
+// just exporting the redux form
+export default reduxForm({
+  form: "streamForm",
+  validate
+})(StreamForm);
+
+```
+
+### React redux form
+
+example for redux form and connect using together
+
+```
+import React from "react";
+import { connect } from "react-redux";
+import { createStream } from "../../actions";
+
+import { Field, reduxForm } from "redux-form";
+
+class StreamCreate extends React.Component {
+  // getInput(fieldProps) {
+  //   return <input {...fieldProps.input} />;
+  // }
+  getRenderError = meta => {
+    if (meta.touched && meta.error) {
+      return <div className="ui error message">{meta.error}</div>;
+    }
+  };
+
+  getInput = ({ input, label, meta }) => {
+    //console.log(meta);
+    const className = `field ${meta.touched && meta.error ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <input {...input} />
+        {this.getRenderError(meta)}
+      </div>
+    );
+  };
+  resetForm = () => {
+    this.props.reset();
+  };
+  formSubmit = formValues => {
+    //console.log("fromValues", formValues);
+
+    this.props.createStream(formValues);
+  };
+  render() {
+    console.log("test", this.props);
+    return (
+      <form
+        className="ui form error"
+        onSubmit={this.props.handleSubmit(this.formSubmit)}
+      >
+        <Field name="title" component={this.getInput} label="Enter Name" />
+        <Field
+          name="description"
+          component={this.getInput}
+          label="Enter Description"
+        />
+        <button className="ui button primary" onClick={this.resetForm}>
+          Reset
+        </button>
+        <button className="ui button primary">Submit</button>
+      </form>
+    );
+  }
+}
+const validate = formValues => {
+  let error = {};
+  if (!formValues.title) {
+    error.title = "Must enter the title";
+  }
+  if (!formValues.description) {
+    error.description = "Must enter the description";
+  }
+  return error;
+};
+// exporting the redux form with connet
+const formWrapped = reduxForm({
+  form: "streamCreate",
+  validate
+})(StreamCreate);
+export default connect(
+  null,
+  { createStream }
+)(formWrapped);
+
+```
